@@ -5,13 +5,12 @@ metadata:
   namespace: openshift-gitops
 spec:
   generators:
-    - cluster:
-        # Aquí podemos usar selectores de cluster que ArgoCD sincroniza de ACM
-        selector:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
           matchLabels:
-            argocd.argoproj.io/secret-type: cluster
-            # Etiqueta que podríamos agregar mediante ACM o manualmente en el Hub
-            environment: production
+            cluster.open-cluster-management.io/placement: placement-3scale
+        requeueAfterSeconds: 180
   template:
     metadata:
       name: '{{name}}-3scale'
