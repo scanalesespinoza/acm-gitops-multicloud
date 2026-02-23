@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: 3scale-multicluster
+  namespace: openshift-gitops
+spec:
+  generators:
+    - cluster:
+        # Aquí podemos usar selectores de cluster que ArgoCD sincroniza de ACM
+        selector:
+          matchLabels:
+            argocd.argoproj.io/secret-type: cluster
+            # Etiqueta que podríamos agregar mediante ACM o manualmente en el Hub
+            environment: production
+  template:
+    metadata:
+      name: '{{name}}-3scale'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/USER/acm-gitops-multicloud.git' # UPDATE REPO URL AFTER PUSHING TO GITHUB
+        targetRevision: HEAD
+        path: components/3scale/overlays/prod
+      destination:
+        server: '{{server}}'
+        namespace: 3scale-system
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
