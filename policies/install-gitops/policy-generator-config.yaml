@@ -1,0 +1,18 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: install-openshift-gitops
+policyDefaults:
+  namespace: openshift-gitops-operator
+  placement:
+    clusterSelectors:
+      vendor: "OpenShift"
+  remediationAction: enforce
+  severity: high
+  evaluationInterval:
+    compliant: 10m
+    noncompliant: 10s
+policies:
+  - name: policy-install-openshift-gitops
+    manifests:
+      - path: openshift-gitops-subscription.yaml
