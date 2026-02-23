@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: datagrid-multicluster
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: placement-datagrid
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: '{{name}}-datagrid'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/USER/acm-gitops-multicloud.git' # UPDATE REPO URL AFTER PUSHING TO GITHUB
+        targetRevision: HEAD
+        path: components/datagrid/overlays/prod
+      destination:
+        server: '{{server}}'
+        namespace: datagrid-system
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

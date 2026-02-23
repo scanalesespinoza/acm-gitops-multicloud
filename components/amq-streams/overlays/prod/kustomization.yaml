@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+patches:
+  - target:
+      kind: Kafka
+      name: hub-kafka
+    patch: |-
+      - op: replace
+        path: /spec/kafka/replicas
+        value: 3
+      - op: replace
+        path: /spec/kafka/storage/type
+        value: persistent-claim
+      - op: add
+        path: /spec/kafka/storage/size
+        value: 100Gi
+      - op: replace
+        path: /spec/zookeeper/replicas
+        value: 3
+      - op: replace
+        path: /spec/zookeeper/storage/type
+        value: persistent-claim
+      - op: add
+        path: /spec/zookeeper/storage/size
+        value: 100Gi
