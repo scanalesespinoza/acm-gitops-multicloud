@@ -17,7 +17,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: 'https://github.com/USER/acm-gitops-multicloud.git' # UPDATE REPO URL AFTER PUSHING TO GITHUB
+        repoURL: 'https://github.com/scanalesespinoza/acm-gitops-multicloud.git' # UPDATE REPO URL AFTER PUSHING TO GITHUB
         targetRevision: HEAD
         path: components/datagrid/overlays/prod
       destination:
