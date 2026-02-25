@@ -5,6 +5,7 @@ metadata:
   namespace: 3scale-system
   annotations:
     argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   wildcardDomain: example.com
   tenantName: 3scale
