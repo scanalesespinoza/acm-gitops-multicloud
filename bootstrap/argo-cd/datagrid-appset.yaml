@@ -21,7 +21,7 @@ spec:
         targetRevision: HEAD
         path: components/datagrid/overlays/prod
       destination:
-        server: '{{server}}'
+        name: '{{name}}'
         namespace: datagrid-system
       syncPolicy:
         automated:

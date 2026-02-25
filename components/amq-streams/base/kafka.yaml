@@ -3,6 +3,8 @@ kind: Kafka
 metadata:
   name: hub-kafka
   namespace: amq-streams-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   kafka:
     version: 3.6.0

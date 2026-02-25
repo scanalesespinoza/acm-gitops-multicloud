@@ -3,6 +3,8 @@ kind: APIManager
 metadata:
   name: apimanager
   namespace: 3scale-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   wildcardDomain: example.com
   tenantName: 3scale

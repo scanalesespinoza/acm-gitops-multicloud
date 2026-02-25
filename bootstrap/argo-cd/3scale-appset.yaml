@@ -21,7 +21,7 @@ spec:
         targetRevision: HEAD
         path: components/3scale/overlays/prod
       destination:
-        server: '{{server}}'
+        name: '{{name}}'
         namespace: 3scale-system
       syncPolicy:
         automated:
