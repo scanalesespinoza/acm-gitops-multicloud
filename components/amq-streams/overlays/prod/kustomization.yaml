@@ -4,24 +4,28 @@ resources:
   - ../../base
 patches:
   - target:
-      kind: Kafka
-      name: hub-kafka
+      kind: KafkaNodePool
+      name: broker
     patch: |-
       - op: replace
-        path: /spec/kafka/replicas
+        path: /spec/replicas
         value: 3
       - op: replace
-        path: /spec/kafka/storage/type
+        path: /spec/storage/type
         value: persistent-claim
       - op: add
-        path: /spec/kafka/storage/size
+        path: /spec/storage/size
         value: 100Gi
+  - target:
+      kind: KafkaNodePool
+      name: controller
+    patch: |-
       - op: replace
-        path: /spec/zookeeper/replicas
+        path: /spec/replicas
         value: 3
       - op: replace
-        path: /spec/zookeeper/storage/type
+        path: /spec/storage/type
         value: persistent-claim
       - op: add
-        path: /spec/zookeeper/storage/size
+        path: /spec/storage/size
         value: 100Gi
