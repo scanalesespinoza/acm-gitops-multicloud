@@ -3,6 +3,8 @@ kind: Subscription
 metadata:
   name: 3scale-operator
   namespace: 3scale-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   channel: threescale-2.16
   installPlanApproval: Automatic
