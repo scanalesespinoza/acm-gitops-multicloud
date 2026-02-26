@@ -1,0 +1,33 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: controller
+  namespace: amq-streams-system
+  labels:
+    strimzi.io/cluster: hub-kafka
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  replicas: 1
+  roles:
+    - controller
+  storage:
+    type: ephemeral
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: broker
+  namespace: amq-streams-system
+  labels:
+    strimzi.io/cluster: hub-kafka
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  replicas: 1
+  roles:
+    - broker
+  storage:
+    type: ephemeral
