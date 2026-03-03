@@ -1,0 +1,18 @@
+apiVersion: capabilities.3scale.net/v1alpha1
+kind: Tenant
+metadata:
+  name: internal-tenant
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  username: admin
+  email: admin@internal.example.com
+  organizationName: Internal Ecorp
+  systemMasterUrl: https://master.prod.apps.example.com
+  tenantSecretRef:
+    name: tenant-secret-internal
+  passwordCredentialsRef:
+    name: admin-secret-internal
+  masterCredentialsRef:
+    name: system-seed
