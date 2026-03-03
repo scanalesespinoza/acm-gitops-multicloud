@@ -53,10 +53,43 @@ Una vez la infraestructura GitOps está operando en los nodos gestionados, debes
 - Esto creará los `ApplicationSets` raíz. Estos ApplicationSets usarán generadores conectados a ACM (*ACM Cluster Decision Generator*).
 - Todo clúster manejado que cumpla con los selectores del ApplicationSet recibirá instantáneamente y de forma automatizada las cargas de este repositorio (la instalación de 3scale, secretos, tenants y productos de APIs).
 
-### 5. Configurar un Producto Nuevo o Actualizar Tenancy
-- Sigue la **Regla de Integración Continua** interna:
-  1. Crea una rama en Git para tu funcionalidad (`git checkout -b <rama>`).
-  2. Define o modifica el kustomize deseado bajo `components/3scale/overlays/prod/`.
-  3. Comitea y empuja tus cambios de forma segura a GitHub (`git push`).
-  4. Crea un PR y aplícalo sobre la rama principal (Target). 
-  5. ArgoCD en el Hub reaccionará en el siguiente ciclo de escaneo (o vía Webhook) e iniciará la sincronización en cadena hacia todos los clusters destino de ACM.
+### 5. Configurar un Producto Nuevo o Actualizar Tenancy (Ejemplo Práctico)
+Para agregar nuevos Tenants o Productos (APIs) a 3scale usando este modelo GitOps, debes operar siempre desde Git siguiendo la **Regla de Integración Continua** interna:
+
+**Paso A: Aislar los cambios**
+1. Crea una rama dedicada para tu nueva funcionalidad:
+   ```bash
+   git checkout -b feat/add-my-new-api
+   ```
+
+**Paso B: Definición Declarativa (Infrastructure as Code)**
+2. Crea los manifiestos YAML (`Tenant`, `Product`, `Secret`) dentro del directorio base o los overlays específicos (ej. `components/3scale/overlays/prod/`).
+   *Ejemplo de `Product` creado (`components/3scale/overlays/prod/echo-api-product.yaml`):*
+   ```yaml
+   apiVersion: capabilities.3scale.net/v1beta1
+   kind: Product
+   metadata:
+     name: echo-api
+   spec:
+     name: "Echo API Product"
+   ```
+3. Registra de forma explícita los nuevos archivos creados dentro de la lista `resources:` del archivo `kustomization.yaml` ubicado en ese mismo directorio:
+   ```yaml
+   apiVersion: kustomize.config.k8s.io/v1beta1
+   kind: Kustomization
+   resources:
+     - ../../base
+     - secrets.yaml
+     - echo-api-product.yaml
+   # ...
+   ```
+
+**Paso C: Sincronización y Orquestación**
+4. Registra, empaqueta y sube tus cambios al repositorio remoto:
+   ```bash
+   git add components/3scale/overlays/prod/
+   git commit -m "feat: Add new echo-api product and secrets to 3scale"
+   git push origin feat/add-my-new-api
+   ```
+5. **Validación**: Abre un Pull Request (PR) en Github hacia tu rama principal o target (`main` / `production`).
+6. Al fusionar el PR (Merge), el ArgoCD instalado en tu clúster Hub reaccionará al webhook (o en su próximo ciclo de sincronización) y empujará automáticamente la nueva configuración hacia todos los clústeres ACM designados. Ni tú ni el administrador necesitarán intervenir manualmente mediante `oc apply` en el ecosistema 3scale interactivo.
