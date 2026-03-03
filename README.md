@@ -9,7 +9,7 @@ Esta solución integra **Red Hat Advanced Cluster Management (ACM)** y **Red Hat
 
 ### Flujo de Operación:
 1. **Instalación de GitOps (Vía ACM Policy)**: Las políticas en el clúster Hub (`policies/install-gitops`) descubren los clústeres manejados y despliegan automáticamente el operador de OpenShift GitOps en ellos.
-2. **Despliegue de Productos (Vía ApplicationSets)**: El propio Hub de GitOps utiliza *ApplicationSets* (`bootstrap/argo-cd`) integrados con ACM Placement para apuntar a los clústeres manejados y desplegar los productos (ej. 3Scale).
+2. **Despliegue de Productos (Vía ApplicationSets)**: El propio Hub de GitOps utiliza *ApplicationSets* (`bootstrap/argo-cd`) integrados con ACM Placement para apuntar a los clústeres manejados y desplieggar los productos (ej. 3Scale).
 3. **Sincronización de Configuraciones**: Los manifiestos base y parches específicos por entorno (mediante *Kustomize*, ubicados en `components/3scale`) son aplicados por el operador de GitOps local en el clúster manejado, garantizando que el estado final sea consistente con este repositorio Git.
 
 ## Estructura de Directorios
@@ -21,7 +21,42 @@ Esta solución integra **Red Hat Advanced Cluster Management (ACM)** y **Red Hat
 - `clusters/` - Configuraciones o parches específicos por clúster (ajustes finos).
 - `policies/` - Políticas de ACM para el despliegue automático de la infraestructura base (ej. el operador de OpenShift GitOps).
 
-## Uso
+---
 
-1. El servidor ArgoCD del Hub debe estar configurado para reconciliar contra este repositorio.
-2. Para habilitar un producto como 3Scale en nuevos clústeres manejados, basta con etiquetar el clúster en ACM para que cumpla con los selectores de los ApplicationSets creados en `bootstrap/argo-cd/`.
+## Configuración y Uso en ACM
+
+Para orquestar todo este repositorio sobre una infraestructura multicluster con Red Hat ACM, sigue estos pasos explicados a continuación:
+
+### 1. Prerrequisitos (En el Hub Cluster)
+- Debes tener **Red Hat Advanced Cluster Management (ACM)** instalado y funcionando.
+- Debes tener **OpenShift GitOps** instalado en el Hub (para alojar la instancia de ArgoCD central que actuará como controlador principal).
+- Los clústeres remotos deben estar importados y bajo gestión (Managed) de ACM.
+
+### 2. Etiquetado de Clústeres Administrados
+Para que ACM sepa a qué clústeres debe enviar configuraciones o aplicaciones, debes añadir etiquetas o *labels* en la definición de cada `ManagedCluster`. 
+- Etiqueta de ejemplo sugerida en este repo: `environment: prod` o `gitops: enabled`. (Validas esto según tu `PlacementRule`).
+
+### 3. Aplicación de Gobernanza (Políticas y GitOps)
+El primer paso práctico es lograr que todos los clústeres administrados (target) adquieran la capacidad GitOps y los objetos fundacionales.
+- Aplica los recursos de la carpeta `policies/` desde el clúster Hub.
+  ```bash
+  oc apply -k policies/install-gitops/
+  ```
+- ACM distribuirá esta configuración hacia los clústeres administrados dictados por el `PlacementRule`. Esta política instalará el Operador de GitOps en el clúster remoto de forma automatizada comprobando que el estado final deseado se cumpla (*Enforce*).
+
+### 4. Bootstrapping Inicial del Repositorio (ArgoCD en el Hub)
+Una vez la infraestructura GitOps está operando en los nodos gestionados, debes enlazar este repositorio a tu ArgoCD central a través de una aplicación maestra (Patrón *App of Apps*) o aplicando directamente la carpeta de `bootstrap`.
+- Aplica el "semillero" en el namespace del ArgoCD central en tu clúster Hub:
+  ```bash
+  oc apply -k bootstrap/argo-cd/ -n openshift-gitops
+  ```
+- Esto creará los `ApplicationSets` raíz. Estos ApplicationSets usarán generadores conectados a ACM (*ACM Cluster Decision Generator*).
+- Todo clúster manejado que cumpla con los selectores del ApplicationSet recibirá instantáneamente y de forma automatizada las cargas de este repositorio (la instalación de 3scale, secretos, tenants y productos de APIs).
+
+### 5. Configurar un Producto Nuevo o Actualizar Tenancy
+- Sigue la **Regla de Integración Continua** interna:
+  1. Crea una rama en Git para tu funcionalidad (`git checkout -b <rama>`).
+  2. Define o modifica el kustomize deseado bajo `components/3scale/overlays/prod/`.
+  3. Comitea y empuja tus cambios de forma segura a GitHub (`git push`).
+  4. Crea un PR y aplícalo sobre la rama principal (Target). 
+  5. ArgoCD en el Hub reaccionará en el siguiente ciclo de escaneo (o vía Webhook) e iniciará la sincronización en cadena hacia todos los clusters destino de ACM.
