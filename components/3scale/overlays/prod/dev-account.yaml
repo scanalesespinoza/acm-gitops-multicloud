@@ -1,0 +1,13 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: DeveloperAccount
+metadata:
+  name: developer-corp
+  annotations:
+    argocd.argoproj.io/sync-wave: "16"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  tenantRef:
+    name: internal-tenant
+  orgName: "Developer Corp"
+  monthlyBillingEnabled: false
+  monthlyChargingEnabled: false

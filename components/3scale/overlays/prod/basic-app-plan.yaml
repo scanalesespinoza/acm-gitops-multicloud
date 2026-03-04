@@ -1,0 +1,17 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: ApplicationPlan
+metadata:
+  name: basic-app-plan
+  annotations:
+    argocd.argoproj.io/sync-wave: "16"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  name: "Basic Plan"
+  systemName: "basic"
+  productCRName: echo-api
+  customAppPlan: false
+  appsRequireApproval: false
+  setupFee: "0.00"
+  costPerMonth: "0.00"
+  trialPeriodDays: 0
+  state: "published"

@@ -1,0 +1,23 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: CustomPolicyDefinition
+metadata:
+  name: example-custom-policy
+  annotations:
+    argocd.argoproj.io/sync-wave: "15"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  name: "Header Injector Policy"
+  version: "1.0.0"
+  schema:
+    $schema: "http://json-schema.org/draft-07/schema#"
+    name: "Header Injector Policy"
+    version: "1.0.0"
+    summary: "Injects a custom X-Company-ID header."
+    configuration:
+      type: object
+      properties:
+        company_id:
+          type: string
+          description: "Company ID to inject"
+  tenantRef:
+    name: internal-tenant

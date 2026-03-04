@@ -12,12 +12,18 @@ Esta solución integra **Red Hat Advanced Cluster Management (ACM)** y **Red Hat
 2. **Despliegue de Productos (Vía ApplicationSets)**: El propio Hub de GitOps utiliza *ApplicationSets* (`bootstrap/argo-cd`) integrados con ACM Placement para apuntar a los clústeres manejados y desplieggar los productos (ej. 3Scale).
 3. **Sincronización de Configuraciones**: Los manifiestos base y parches específicos por entorno (mediante *Kustomize*, ubicados en `components/3scale`) son aplicados por el operador de GitOps local en el clúster manejado, garantizando que el estado final sea consistente con este repositorio Git.
 
-## Estructura de Directorios
+## Estructura de Directorios y Ejemplos Incluidos
 
 - `bootstrap/argo-cd/` - Configuraciones base de ApplicationSets en el Hub que despliegan productos en los clústeres remotos.
-- `components/` - Bases de Kustomize para los diferentes productos de Red Hat (ej. `3scale`).
-  - `components/<product>/base/` - Definiciones base (Namespace, OperatorGroup, Subscription, CustomResources).
-  - `components/<product>/overlays/` - Parches y adaptaciones específicas para distintos entornos (dev, prod).
+- `components/` - Bases de Kustomize para los diferentes productos de Red Hat (`3scale`, `amq-streams`, `datagrid`).
+  - `components/3scale/` - Aprovisiona la plataforma API Management (`APIManager`) e incluye recursos de ejemplo:
+    - **Tenants** (`Tenant` interno y externo), **Productos** y **Backends** (`Product`, `Backend`).
+    - Planes y Aplicaciones (`ApplicationPlan`, `DeveloperAccount`, `Application`).
+    - **Políticas Personalizadas** (`CustomPolicyDefinition`).
+  - `components/amq-streams/` - Aprovisiona Kafka (`Kafka`, `KafkaNodePool`) e incluye recursos de ejemplo para operar el clúster:
+    - **Tópico de demostración** (`KafkaTopic`) y **Usuario seguro SCRAM-SHA-512** (`KafkaUser`).
+  - `components/datagrid/` - Aprovisiona Infinispan (`Infinispan`) e incluye una caché de ejemplo:
+    - **Distributed Cache** configurado por XML (`Cache`).
 - `clusters/` - Configuraciones o parches específicos por clúster (ajustes finos).
 - `policies/` - Políticas de ACM para el despliegue automático de la infraestructura base (ej. el operador de OpenShift GitOps).
 

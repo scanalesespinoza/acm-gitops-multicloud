@@ -1,0 +1,15 @@
+apiVersion: capabilities.3scale.net/v1beta1
+kind: Application
+metadata:
+  name: dev-echo-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "17"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  name: "Echo Test App"
+  description: "App created to test the Echo API"
+  accountCR:
+    name: developer-corp
+  productCR:
+    name: echo-api
+  applicationPlanName: basic

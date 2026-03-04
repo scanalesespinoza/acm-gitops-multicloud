@@ -1,16 +1,13 @@
 apiVersion: capabilities.3scale.net/v1beta1
-kind: Product
+kind: Backend
 metadata:
-  name: echo-api
+  name: echo-backend
   annotations:
     argocd.argoproj.io/sync-wave: "15"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  name: "Echo API Product"
-  systemName: "echo-api"
-  description: "A sample product representing an Echo API"
+  name: "Echo API Backend"
+  systemName: "echo-backend"
+  privateBaseURL: "https://echo-api.3scale.net"
   tenantRef:
     name: internal-tenant
-  backendUsages:
-    echo-backend:
-      path: "/v1/echo"

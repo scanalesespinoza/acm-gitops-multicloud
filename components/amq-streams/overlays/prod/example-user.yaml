@@ -1,0 +1,28 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaUser
+metadata:
+  name: my-demo-user
+  namespace: amq-streams-system
+  labels:
+    strimzi.io/cluster: hub-kafka
+  annotations:
+    argocd.argoproj.io/sync-wave: "15"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: my-demo-topic
+        operation: Read
+      - resource:
+          type: topic
+          name: my-demo-topic
+        operation: Write
+      - resource:
+          type: group
+          name: my-demo-group
+        operation: Read

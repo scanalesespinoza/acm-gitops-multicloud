@@ -6,6 +6,11 @@ resources:
   - internal-tenant.yaml
   - external-tenant.yaml
   - echo-api-product.yaml
+  - echo-backend.yaml
+  - custom-policy.yaml
+  - basic-app-plan.yaml
+  - dev-account.yaml
+  - dev-app.yaml
 patches:
   - target:
       kind: APIManager

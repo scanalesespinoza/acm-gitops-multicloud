@@ -1,0 +1,17 @@
+apiVersion: infinispan.org/v2alpha1
+kind: Cache
+metadata:
+  name: demo-cache
+  namespace: datagrid-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "15"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  clusterName: infinispan
+  name: demo-cache
+  template: |-
+    <distributed-cache mode="SYNC">
+      <encoding media-type="application/x-protostream"/>
+      <memory max-count="100000" when-full="REMOVE"/>
+      <expiration lifespan="86400000"/>
+    </distributed-cache>
