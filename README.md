@@ -99,3 +99,18 @@ Para agregar nuevos Tenants o Productos (APIs) a 3scale usando este modelo GitOp
    ```
 5. **Validación**: Abre un Pull Request (PR) en Github hacia tu rama principal o target (`main` / `production`).
 6. Al fusionar el PR (Merge), el ArgoCD instalado en tu clúster Hub reaccionará al webhook (o en su próximo ciclo de sincronización) y empujará automáticamente la nueva configuración hacia todos los clústeres ACM designados. Ni tú ni el administrador necesitarán intervenir manualmente mediante `oc apply` en el ecosistema 3scale interactivo.
+
+---
+
+## Why is recommended? (Arquitectura Recomendada)
+
+Emplear la tríada **ACM + GitOps (ArgoCD) + Kustomize** representa el estándar de oro y la topología de diseño recomendada por Red Hat para la gestión multicluster a gran escala (*Fleet Management*), en especial para cargas críticas de Middleware (3scale, AMQ, Data Grid):
+
+1. **Homogeneidad garantizada (Single Source of Truth):**
+   GitOps elimina por completo la "desviación de configuración" (*Configuration Drift*). Todos los clústeres, sin importar dónde estén desplegados, mantienen una infraestructura 100% idéntica y auditable directamente desde este repositorio de Git.
+2. **Escalabilidad y Despliegue Dinámico (ACM Placement):**
+   Al integrar *ApplicationSets* con los generadores de ACM, la adición de un nuevo clúster a la flota corporativa tan solo requiere asignarle una etiqueta (Ej: `environment: prod`). Automáticamente hereda toda la estructura base de Middleware en minutos sin ejecutar un solo script manual adicional.
+3. **Flexibilidad y Reusabilidad Controlada (Kustomize):**
+   A través de la estructura de jerarquías (`base/` vs `overlays/`) dictaminada por Kustomize, se asegura que todos los entornos compartan el núcleo técnico corporativo, pero permitiendo variaciones o parches específicos por entorno (ej. topologías High Availability en producción vs efímeras en desarrollo).
+4. **Gobernanza y Autorreparación (ACM Policies):**
+   Las políticas de ACM aseguran el cumplimiento continuo. Si un operador (como el propio OpenShift GitOps) es eliminado inadvertidamente en un clúster manejado, la política central (*Enforce*) lo detectará y reinstalará automáticamente, logrando el estado "auto-sanable".
