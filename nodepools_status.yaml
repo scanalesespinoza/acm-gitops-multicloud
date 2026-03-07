@@ -1,0 +1,77 @@
+apiVersion: v1
+items:
+- apiVersion: kafka.strimzi.io/v1beta2
+  kind: KafkaNodePool
+  metadata:
+    annotations:
+      argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/tracking-id: local-cluster-amq-streams:kafka.strimzi.io/KafkaNodePool:amq-streams-system/broker
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kafka.strimzi.io/v1beta2","kind":"KafkaNodePool","metadata":{"annotations":{"argocd.argoproj.io/sync-options":"SkipDryRunOnMissingResource=true","argocd.argoproj.io/sync-wave":"5","argocd.argoproj.io/tracking-id":"local-cluster-amq-streams:kafka.strimzi.io/KafkaNodePool:amq-streams-system/broker"},"labels":{"strimzi.io/cluster":"hub-kafka"},"name":"broker","namespace":"amq-streams-system"},"spec":{"replicas":3,"roles":["broker"],"storage":{"size":"100Gi","type":"persistent-claim"}}}
+    creationTimestamp: "2026-02-26T03:52:32Z"
+    generation: 1
+    labels:
+      strimzi.io/cluster: hub-kafka
+    name: broker
+    namespace: amq-streams-system
+    resourceVersion: "426022"
+    uid: 6e101e45-59e5-485d-ac01-138fce317f17
+  spec:
+    replicas: 3
+    roles:
+    - broker
+    storage:
+      size: 100Gi
+      type: persistent-claim
+  status:
+    clusterId: 0NwSqAaxST6VaYX-Agwcjw
+    conditions: []
+    labelSelector: strimzi.io/cluster=hub-kafka,strimzi.io/name=hub-kafka-kafka,strimzi.io/kind=Kafka,strimzi.io/pool-name=broker
+    nodeIds:
+    - 0
+    - 1
+    - 2
+    observedGeneration: 1
+    replicas: 3
+    roles:
+    - broker
+- apiVersion: kafka.strimzi.io/v1beta2
+  kind: KafkaNodePool
+  metadata:
+    annotations:
+      argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/tracking-id: local-cluster-amq-streams:kafka.strimzi.io/KafkaNodePool:amq-streams-system/controller
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"kafka.strimzi.io/v1beta2","kind":"KafkaNodePool","metadata":{"annotations":{"argocd.argoproj.io/sync-options":"SkipDryRunOnMissingResource=true","argocd.argoproj.io/sync-wave":"5","argocd.argoproj.io/tracking-id":"local-cluster-amq-streams:kafka.strimzi.io/KafkaNodePool:amq-streams-system/controller"},"labels":{"strimzi.io/cluster":"hub-kafka"},"name":"controller","namespace":"amq-streams-system"},"spec":{"replicas":3,"roles":["controller"],"storage":{"size":"100Gi","type":"persistent-claim"}}}
+    creationTimestamp: "2026-02-26T03:52:32Z"
+    generation: 1
+    labels:
+      strimzi.io/cluster: hub-kafka
+    name: controller
+    namespace: amq-streams-system
+    resourceVersion: "426023"
+    uid: 8bc20b34-6c14-4a4e-ae48-f4e44529563e
+  spec:
+    replicas: 3
+    roles:
+    - controller
+    storage:
+      size: 100Gi
+      type: persistent-claim
+  status:
+    clusterId: 0NwSqAaxST6VaYX-Agwcjw
+    conditions: []
+    labelSelector: strimzi.io/cluster=hub-kafka,strimzi.io/name=hub-kafka-kafka,strimzi.io/kind=Kafka,strimzi.io/pool-name=controller
+    nodeIds:
+    - 3
+    - 4
+    - 5
+    observedGeneration: 1
+    replicas: 3
+    roles:
+    - controller
+kind: List
+metadata:
+  resourceVersion: ""

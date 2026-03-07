@@ -1,0 +1,1331 @@
+apiVersion: packages.operators.coreos.com/v1
+kind: PackageManifest
+metadata:
+  creationTimestamp: "2026-02-25T17:33:26Z"
+  labels:
+    catalog: redhat-operators
+    catalog-namespace: openshift-marketplace
+    operatorframework.io/arch.amd64: supported
+    operatorframework.io/arch.arm64: supported
+    operatorframework.io/arch.ppc64le: supported
+    operatorframework.io/arch.s390x: supported
+    operatorframework.io/os.linux: supported
+    provider: Red Hat
+    provider-url: https://github.com/streamshub
+  name: amq-streams-console
+  namespace: default
+spec: {}
+status:
+  catalogSource: redhat-operators
+  catalogSourceDisplayName: Red Hat Operators
+  catalogSourceNamespace: openshift-marketplace
+  catalogSourcePublisher: Red Hat
+  channels:
+  - currentCSV: amq-streams-console.v3.0.1-5
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:baa3cfb9a2a708db04a30ca86f105567d4084238ba6a390dbcba3313e68107f6
+        createdAt: "2025-11-11T16:09:40Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=2.9.0-0 <3.0.1-5'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/3.0
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:395103ad8ca8e1d2dcd3f05e7c3cc7abedef65189e008fe2d83928bc29558900
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:baa3cfb9a2a708db04a30ca86f105567d4084238ba6a390dbcba3313e68107f6
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:c46d792cbb95b26679150c6733251d838b281da28f1925c8270201560cb357bc
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:ce399e40e9467bce9b81c8d280d523732ba3e75d8f6c67e15cfcecd1842e024f
+      version: 3.0.1-5
+    entries:
+    - name: amq-streams-console.v3.0.1-5
+      version: 3.0.1-5
+    - name: amq-streams-console.v3.0.1-3
+      version: 3.0.1-3
+    - name: amq-streams-console.v3.0.1-2
+      version: 3.0.1-2
+    - name: amq-streams-console.v3.0.0-10
+      version: 3.0.0-10
+    - name: amq-streams-console.v3.0.0-7
+      version: 3.0.0-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: alpha
+  - currentCSV: amq-streams-console.v2.8.0-13-0.1738265629.p
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:1b1b80710885b43600e22ff2a24930b5cab06cd91fad439ad8a282c00b4564b9
+        createdAt: "2024-11-12T15:34:06Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.substitutesFor: amq-streams-console.v2.8.0-13
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.8
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.23.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:1b1b80710885b43600e22ff2a24930b5cab06cd91fad439ad8a282c00b4564b9
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:38b80d81e54d59667c1f7dfa4da4125d5c7430816da130ddc84678a4e3cff6cf
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:366d60ff48fb9ba32dc73d92a775046d7b1eb1df21c93e31605372c7858f16ca
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:b83c3263e77904ce1c0f95b7bfab969605c97297a5598fd794d64daf508c52c0
+      version: 2.8.0-13+0.1738265629.p
+    entries:
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: amq-streams-2.8.x
+  - currentCSV: amq-streams-console.v2.9.3-10
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:549ee408eddef82ab8480da60ef8d404637f799c5c1444cb24c8c363ca2e9df8
+        createdAt: "2026-02-06T18:34:44Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=2.8.0-0 <2.9.3-10'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.9
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:a9d87aaf09ae57aff048d354f05262d10605140dfcd8ed068c2ed52a5ebd1d6b
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:ff7305cddff8e0affec171073e50b18a15679a02f326ae2b1e3ac290018d3e50
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:549ee408eddef82ab8480da60ef8d404637f799c5c1444cb24c8c363ca2e9df8
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:5d59121167367b867d0e4d75d106b99e7765440b2ae74b99aacaf1c5de96d705
+      version: 2.9.3-10
+    entries:
+    - name: amq-streams-console.v2.9.3-10
+      version: 2.9.3-10
+    - name: amq-streams-console.v2.9.3-7
+      version: 2.9.3-7
+    - name: amq-streams-console.v2.9.3-6
+      version: 2.9.3-6
+    - name: amq-streams-console.v2.9.3-5
+      version: 2.9.3-5
+    - name: amq-streams-console.v2.9.3-2
+      version: 2.9.3-2
+    - name: amq-streams-console.v2.9.2-2
+      version: 2.9.2-2
+    - name: amq-streams-console.v2.9.2-1
+      version: 2.9.2-1
+    - name: amq-streams-console.v2.9.1-7
+      version: 2.9.1-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: amq-streams-2.9.x
+  - currentCSV: amq-streams-console.v2.9.3-10
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:549ee408eddef82ab8480da60ef8d404637f799c5c1444cb24c8c363ca2e9df8
+        createdAt: "2026-02-06T18:34:44Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=2.8.0-0 <2.9.3-10'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/2.9
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:5d59121167367b867d0e4d75d106b99e7765440b2ae74b99aacaf1c5de96d705
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:a9d87aaf09ae57aff048d354f05262d10605140dfcd8ed068c2ed52a5ebd1d6b
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:ff7305cddff8e0affec171073e50b18a15679a02f326ae2b1e3ac290018d3e50
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:549ee408eddef82ab8480da60ef8d404637f799c5c1444cb24c8c363ca2e9df8
+      version: 2.9.3-10
+    entries:
+    - name: amq-streams-console.v2.9.3-10
+      version: 2.9.3-10
+    - name: amq-streams-console.v2.9.3-7
+      version: 2.9.3-7
+    - name: amq-streams-console.v2.9.3-6
+      version: 2.9.3-6
+    - name: amq-streams-console.v2.9.3-5
+      version: 2.9.3-5
+    - name: amq-streams-console.v2.9.3-2
+      version: 2.9.3-2
+    - name: amq-streams-console.v2.9.2-2
+      version: 2.9.2-2
+    - name: amq-streams-console.v2.9.2-1
+      version: 2.9.2-1
+    - name: amq-streams-console.v2.9.1-7
+      version: 2.9.1-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: amq-streams-2.x
+  - currentCSV: amq-streams-console.v3.0.1-5
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:baa3cfb9a2a708db04a30ca86f105567d4084238ba6a390dbcba3313e68107f6
+        createdAt: "2025-11-11T16:09:40Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=2.9.0-0 <3.0.1-5'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/3.0
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:c46d792cbb95b26679150c6733251d838b281da28f1925c8270201560cb357bc
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:ce399e40e9467bce9b81c8d280d523732ba3e75d8f6c67e15cfcecd1842e024f
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:395103ad8ca8e1d2dcd3f05e7c3cc7abedef65189e008fe2d83928bc29558900
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:baa3cfb9a2a708db04a30ca86f105567d4084238ba6a390dbcba3313e68107f6
+      version: 3.0.1-5
+    entries:
+    - name: amq-streams-console.v3.0.1-5
+      version: 3.0.1-5
+    - name: amq-streams-console.v3.0.1-3
+      version: 3.0.1-3
+    - name: amq-streams-console.v3.0.1-2
+      version: 3.0.1-2
+    - name: amq-streams-console.v3.0.0-10
+      version: 3.0.0-10
+    - name: amq-streams-console.v3.0.0-7
+      version: 3.0.0-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: amq-streams-3.0.x
+  - currentCSV: amq-streams-console.v3.1.0-8
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:5547a88fd2107ba0db01964fca2884fdc6f4ba16523b3ee16fefbab50768be44
+        createdAt: "2026-02-05T14:58:16Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=3.0.0-0 <3.1.0-8'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/3.1
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:dc78b47131b72c2489c0f40c7f75228eda7c439772966912a7098477e0289a61
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:b5ec8951ff1b311a6bbbb0cc534d93c42bfb248aa8f4737273911f771cb3fc1f
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:da2ed7eff48d63535e6e4afea106816312b87d0d21f64733f7eba351bab63dce
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:5547a88fd2107ba0db01964fca2884fdc6f4ba16523b3ee16fefbab50768be44
+      version: 3.1.0-8
+    entries:
+    - name: amq-streams-console.v3.1.0-8
+      version: 3.1.0-8
+    - name: amq-streams-console.v3.1.0-5
+      version: 3.1.0-5
+    - name: amq-streams-console.v3.1.0-4
+      version: 3.1.0-4
+    - name: amq-streams-console.v3.0.1-5
+      version: 3.0.1-5
+    - name: amq-streams-console.v3.0.1-3
+      version: 3.0.1-3
+    - name: amq-streams-console.v3.0.1-2
+      version: 3.0.1-2
+    - name: amq-streams-console.v3.0.0-10
+      version: 3.0.0-10
+    - name: amq-streams-console.v3.0.0-7
+      version: 3.0.0-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: amq-streams-3.1.x
+  - currentCSV: amq-streams-console.v3.1.0-8
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:5547a88fd2107ba0db01964fca2884fdc6f4ba16523b3ee16fefbab50768be44
+        createdAt: "2026-02-05T14:58:16Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=3.0.0-0 <3.1.0-8'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/3.1
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:da2ed7eff48d63535e6e4afea106816312b87d0d21f64733f7eba351bab63dce
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:5547a88fd2107ba0db01964fca2884fdc6f4ba16523b3ee16fefbab50768be44
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:dc78b47131b72c2489c0f40c7f75228eda7c439772966912a7098477e0289a61
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:b5ec8951ff1b311a6bbbb0cc534d93c42bfb248aa8f4737273911f771cb3fc1f
+      version: 3.1.0-8
+    entries:
+    - name: amq-streams-console.v3.1.0-8
+      version: 3.1.0-8
+    - name: amq-streams-console.v3.1.0-5
+      version: 3.1.0-5
+    - name: amq-streams-console.v3.1.0-4
+      version: 3.1.0-4
+    - name: amq-streams-console.v3.0.1-5
+      version: 3.0.1-5
+    - name: amq-streams-console.v3.0.1-3
+      version: 3.0.1-3
+    - name: amq-streams-console.v3.0.1-2
+      version: 3.0.1-2
+    - name: amq-streams-console.v3.0.0-10
+      version: 3.0.0-10
+    - name: amq-streams-console.v3.0.0-7
+      version: 3.0.0-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: amq-streams-3.x
+  - currentCSV: amq-streams-console.v3.1.0-8
+    currentCSVDesc:
+      annotations:
+        alm-examples: |-
+          [
+            {
+              "apiVersion":"console.streamshub.github.com/v1alpha1",
+              "kind":"Console",
+              "metadata":{
+                "name":"example-console"
+              },
+              "spec":{
+                "hostname": "<console-hostname-for-ingress>",
+                "kafkaClusters": [
+                  {
+                    "name": "<strimzi-kafka-resource-name>",
+                    "namespace": "<strimzi-kafka-resource-namespace>",
+                    "listener": "<strimzi-kafka-listener-name>",
+                    "credentials": {
+                      "kafkaUser": {
+                        "name": "<strimzi-kafka-user-name-for-connection>"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        alm-examples-metadata: |-
+          {
+            "example-console": {
+              "description": "Example Console instance with reference to on-cluster Strimzi Kafka resource"
+            }
+          }
+        capabilities: Basic Install
+        categories: Streaming & Messaging
+        certified: "false"
+        containerImage: registry.redhat.io/amq-streams/console-rhel9-operator@sha256:5547a88fd2107ba0db01964fca2884fdc6f4ba16523b3ee16fefbab50768be44
+        createdAt: "2026-02-05T14:58:16Z"
+        features.operators.openshift.io/cnf: "false"
+        features.operators.openshift.io/cni: "false"
+        features.operators.openshift.io/csi: "false"
+        features.operators.openshift.io/disconnected: "true"
+        features.operators.openshift.io/fips-compliant: "true"
+        features.operators.openshift.io/proxy-aware: "false"
+        features.operators.openshift.io/tls-profiles: "false"
+        features.operators.openshift.io/token-auth-aws: "false"
+        features.operators.openshift.io/token-auth-azure: "false"
+        features.operators.openshift.io/token-auth-gcp: "false"
+        olm.skipRange: '>=3.0.0-0 <3.1.0-8'
+        operators.openshift.io/valid-subscription: '["Red Hat AMQ", "Red Hat Application
+          Foundations"]'
+        repository: https://github.com/streamshub/console
+        support: Red Hat
+      apiservicedefinitions: {}
+      customresourcedefinitions:
+        owned:
+        - description: Represents a Console deployment
+          displayName: Console
+          kind: Console
+          name: consoles.console.streamshub.github.com
+          version: v1alpha1
+      description: |-
+        The Red Hat streams for Apache Kafka Console provides a web-based user interface tool for monitoring Apache Kafka® instances within an OpenShift cluster.
+
+        It features a user-friendly way to view Kafka topics and consumer groups, facilitating the searching and filtering of streamed messages. The console also offers insights into Kafka broker disk usage, helping administrators monitor and optimize resource utilization. By simplifying complex Kafka operations, the streams for Apache Kafka Console enhances the efficiency and effectiveness of data streaming management within OpenShift environments.
+      displayName: Streams for Apache Kafka Console
+      installModes:
+      - supported: true
+        type: AllNamespaces
+      - supported: false
+        type: OwnNamespace
+      - supported: false
+        type: SingleNamespace
+      - supported: false
+        type: MultiNamespace
+      keywords:
+      - kafka
+      - messaging
+      - kafka-streams
+      - data-streaming
+      - data-streams
+      - streaming
+      - streams
+      - web
+      - console
+      - ui
+      - user interface
+      links:
+      - name: Product Page
+        url: https://access.redhat.com/products/red-hat-amq
+      - name: Documentation
+        url: https://docs.redhat.com/en/documentation/red_hat_streams_for_apache_kafka/3.1
+      maintainers:
+      - email: customerservice@redhat.com
+        name: Red Hat
+      maturity: alpha
+      minKubeVersion: 1.25.0
+      nativeApis:
+      - group: ""
+        kind: ConfigMap
+        version: v1
+      - group: ""
+        kind: Secret
+        version: v1
+      - group: ""
+        kind: Service
+        version: v1
+      - group: ""
+        kind: ServiceAccount
+        version: v1
+      - group: apps
+        kind: Deployment
+        version: v1
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      - group: rbac.authorization.k8s.io
+        kind: ClusterRoleBinding
+        version: v1
+      provider:
+        name: Red Hat
+        url: https://github.com/streamshub
+      relatedImages:
+      - registry.redhat.io/amq-streams/console-api-rhel9@sha256:b5ec8951ff1b311a6bbbb0cc534d93c42bfb248aa8f4737273911f771cb3fc1f
+      - registry.redhat.io/amq-streams/console-operator-bundle@sha256:da2ed7eff48d63535e6e4afea106816312b87d0d21f64733f7eba351bab63dce
+      - registry.redhat.io/amq-streams/console-rhel9-operator@sha256:5547a88fd2107ba0db01964fca2884fdc6f4ba16523b3ee16fefbab50768be44
+      - registry.redhat.io/amq-streams/console-ui-rhel9@sha256:dc78b47131b72c2489c0f40c7f75228eda7c439772966912a7098477e0289a61
+      version: 3.1.0-8
+    entries:
+    - name: amq-streams-console.v3.1.0-8
+      version: 3.1.0-8
+    - name: amq-streams-console.v3.1.0-5
+      version: 3.1.0-5
+    - name: amq-streams-console.v3.1.0-4
+      version: 3.1.0-4
+    - name: amq-streams-console.v3.0.1-5
+      version: 3.0.1-5
+    - name: amq-streams-console.v3.0.1-3
+      version: 3.0.1-3
+    - name: amq-streams-console.v3.0.1-2
+      version: 3.0.1-2
+    - name: amq-streams-console.v3.0.0-10
+      version: 3.0.0-10
+    - name: amq-streams-console.v3.0.0-7
+      version: 3.0.0-7
+    - name: amq-streams-console.v2.9.1-5
+      version: 2.9.1-5
+    - name: amq-streams-console.v2.9.1-2
+      version: 2.9.1-2
+    - name: amq-streams-console.v2.9.0-8
+      version: 2.9.0-8
+    - name: amq-streams-console.v2.9.0-6
+      version: 2.9.0-6
+    - name: amq-streams-console.v2.9.0-5
+      version: 2.9.0-5
+    - name: amq-streams-console.v2.9.0-3
+      version: 2.9.0-3
+    - name: amq-streams-console.v2.8.0-13
+      version: 2.8.0-13
+    - name: amq-streams-console.v2.8.0-13-0.1738265629.p
+      version: 2.8.0-13+0.1738265629.p
+    name: stable
+  defaultChannel: stable
+  packageName: amq-streams-console
+  provider:
+    name: Red Hat
+    url: https://github.com/streamshub

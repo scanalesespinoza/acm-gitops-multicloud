@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: amq-broker-multicluster
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: placement-amq-broker
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: '{{name}}-amq-broker'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/scanalesespinoza/acm-gitops-multicloud.git'
+        targetRevision: HEAD
+        path: components/amq-broker/overlays/prod
+      destination:
+        name: '{{name}}'
+        namespace: amq-broker-system
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 10s
+            factor: 2
+            maxDuration: 3m
+        syncOptions:
+          - CreateNamespace=true
+          - SkipDryRunOnMissingResource=true

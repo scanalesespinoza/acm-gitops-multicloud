@@ -15,15 +15,19 @@ Esta solución integra **Red Hat Advanced Cluster Management (ACM)** y **Red Hat
 ## Estructura de Directorios y Ejemplos Incluidos
 
 - `bootstrap/argo-cd/` - Configuraciones base de ApplicationSets en el Hub que despliegan productos en los clústeres remotos.
-- `components/` - Bases de Kustomize para los diferentes productos de Red Hat (`3scale`, `amq-streams`, `datagrid`).
+- `components/` - Bases de Kustomize para los diferentes productos de Red Hat (`3scale`, `amq-broker`, `amq-streams`, `datagrid`, `keycloak`, `rhdh`).
   - `components/3scale/` - Aprovisiona la plataforma API Management (`APIManager`) e incluye recursos de ejemplo:
     - **Tenants** (`Tenant` interno y externo), **Productos** y **Backends** (`Product`, `Backend`).
     - Planes y Aplicaciones (`ApplicationPlan`, `DeveloperAccount`, `Application`).
     - **Políticas Personalizadas** (`CustomPolicyDefinition`).
+  - `components/amq-broker/` - Aprovisiona mensajería tradicional con AMQ Broker (`ActiveMQArtemis`).
   - `components/amq-streams/` - Aprovisiona Kafka (`Kafka`, `KafkaNodePool`) e incluye recursos de ejemplo para operar el clúster:
     - **Tópico de demostración** (`KafkaTopic`) y **Usuario seguro SCRAM-SHA-512** (`KafkaUser`).
   - `components/datagrid/` - Aprovisiona Infinispan (`Infinispan`) e incluye una caché de ejemplo:
     - **Distributed Cache** configurado por XML (`Cache`).
+  - `components/keycloak/` - Aprovisiona Red Hat Build of Keycloak (`Keycloak`) e incluye recursos de ejemplo:
+    - **Realm inicial y cliente** configurados mediante (`KeycloakRealmImport`).
+  - `components/rhdh/` - Aprovisiona Red Hat Developer Hub (`Backstage`) como portal de desarrolladores.
 - `clusters/` - Configuraciones o parches específicos por clúster (ajustes finos).
 - `policies/` - Políticas de ACM para el despliegue automático de la infraestructura base (ej. el operador de OpenShift GitOps).
 

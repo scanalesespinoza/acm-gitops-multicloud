@@ -1,0 +1,13 @@
+apiVersion: broker.amq.io/v1beta1
+kind: ActiveMQArtemis
+metadata:
+  name: amq-broker-prod
+  namespace: amq-broker-system
+spec:
+  deploymentPlan:
+    size: 1
+    image: placeholder
+    requireLogin: false
+    persistenceEnabled: false
+    journalType: nio
+    messageMigration: true

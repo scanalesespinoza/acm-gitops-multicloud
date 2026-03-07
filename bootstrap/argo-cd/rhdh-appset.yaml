@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rhdh-multicluster
+  namespace: openshift-gitops
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: placement-rhdh
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: '{{name}}-rhdh'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/scanalesespinoza/acm-gitops-multicloud.git'
+        targetRevision: HEAD
+        path: components/rhdh/overlays/prod
+      destination:
+        name: '{{name}}'
+        namespace: rhdh-system
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 10
+          backoff:
+            duration: 10s
+            factor: 2
+            maxDuration: 3m
+        syncOptions:
+          - CreateNamespace=true
+          - SkipDryRunOnMissingResource=true

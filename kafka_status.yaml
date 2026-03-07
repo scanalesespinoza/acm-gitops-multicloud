@@ -1,0 +1,102 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "5"
+    argocd.argoproj.io/tracking-id: local-cluster-amq-streams:kafka.strimzi.io/Kafka:amq-streams-system/hub-kafka
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kafka.strimzi.io/v1beta2","kind":"Kafka","metadata":{"annotations":{"argocd.argoproj.io/sync-options":"SkipDryRunOnMissingResource=true","argocd.argoproj.io/sync-wave":"5","argocd.argoproj.io/tracking-id":"local-cluster-amq-streams:kafka.strimzi.io/Kafka:amq-streams-system/hub-kafka","strimzi.io/kraft":"enabled","strimzi.io/node-pools":"enabled"},"name":"hub-kafka","namespace":"amq-streams-system"},"spec":{"entityOperator":{"topicOperator":{},"userOperator":{}},"kafka":{"config":{"default.replication.factor":1,"inter.broker.protocol.version":"4.0","min.insync.replicas":1,"offsets.topic.replication.factor":1,"transaction.state.log.min.isr":1,"transaction.state.log.replication.factor":1},"listeners":[{"name":"plain","port":9092,"tls":false,"type":"internal"},{"name":"tls","port":9093,"tls":true,"type":"internal"}],"version":"4.0.0"}}}
+    strimzi.io/kraft: enabled
+    strimzi.io/node-pools: enabled
+  creationTimestamp: "2026-02-25T22:46:50Z"
+  generation: 6
+  name: hub-kafka
+  namespace: amq-streams-system
+  resourceVersion: "427648"
+  uid: 193ed8c7-64d5-483f-846d-7d93663782c1
+spec:
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+  kafka:
+    config:
+      default.replication.factor: 1
+      inter.broker.protocol.version: "4.0"
+      min.insync.replicas: 1
+      offsets.topic.replication.factor: 1
+      transaction.state.log.min.isr: 1
+      transaction.state.log.replication.factor: 1
+    listeners:
+    - name: plain
+      port: 9092
+      tls: false
+      type: internal
+    - name: tls
+      port: 9093
+      tls: true
+      type: internal
+    version: 4.0.0
+status:
+  clusterId: 0NwSqAaxST6VaYX-Agwcjw
+  conditions:
+  - lastTransitionTime: "2026-02-26T03:54:00.899020382Z"
+    message: inter.broker.protocol.version is not used in KRaft-based Kafka clusters
+      and should be removed from the Kafka custom resource.
+    reason: KafkaInterBrokerProtocolVersionInKRaft
+    status: "True"
+    type: Warning
+  - lastTransitionTime: "2026-02-26T03:54:04.339387073Z"
+    status: "True"
+    type: Ready
+  kafkaMetadataState: KRaft
+  kafkaMetadataVersion: 4.0-IV3
+  kafkaNodePools:
+  - name: broker
+  - name: controller
+  kafkaVersion: 4.0.0
+  listeners:
+  - addresses:
+    - host: hub-kafka-kafka-bootstrap.amq-streams-system.svc
+      port: 9092
+    bootstrapServers: hub-kafka-kafka-bootstrap.amq-streams-system.svc:9092
+    name: plain
+  - addresses:
+    - host: hub-kafka-kafka-bootstrap.amq-streams-system.svc
+      port: 9093
+    bootstrapServers: hub-kafka-kafka-bootstrap.amq-streams-system.svc:9093
+    certificates:
+    - |
+      -----BEGIN CERTIFICATE-----
+      MIIFLTCCAxWgAwIBAgIUVsUWIHE9b1wR75rzSatdq8a6MoswDQYJKoZIhvcNAQEN
+      BQAwLTETMBEGA1UECgwKaW8uc3RyaW16aTEWMBQGA1UEAwwNY2x1c3Rlci1jYSB2
+      MDAeFw0yNjAyMjUyMjQ3MDBaFw0yNzAyMjUyMjQ3MDBaMC0xEzARBgNVBAoMCmlv
+      LnN0cmltemkxFjAUBgNVBAMMDWNsdXN0ZXItY2EgdjAwggIiMA0GCSqGSIb3DQEB
+      AQUAA4ICDwAwggIKAoICAQDNMoQNy2m88qdHaWJulTKybcfTE4rUHb4VLtLc2VHD
+      OWGyCY77CSntaQTrZfy9Hy1W42NK4zZvwYPhuRc2+49/+LORhoh0dQQMJEunj0/N
+      DRYVE3h/Ud3RscdW7exXcPJzzT9CeKoN9VvhVY5otSwTJgDLVznRcmSFggXyj9/v
+      3YFBcHFq1yTWufcuAv52aR7RK7nMDBpJkYwTydK5pHgoxI8kCem+8D/8D1ysl2J3
+      PYo2etzR3GI6QoFEksFAd4rUdJX5icvZQC2WdFULW+x/PF04U7ETwxbFdL/yMTzy
+      KvDBB7Jr6JCb2eFR1t8j8gf1meyms8AycNb6SDATpjvUh2N4G+gH3zOPi58f1IiQ
+      wNkUdXwZ6j94Grftjj2D11mS7fPZVeDLwv0o/4AwhCvpTeTlGMLZPESOBdKcunhd
+      /kDgaLv87e1Ri2RXRNzYjZpiiTbp2mBugn1sFzih0kTMlqtPZ53bvJAT7W7SO38c
+      3svOGUcCCi4X/UedIUyoBWpUzIraGjRqpZCUsSdACPa998pjU8bsAsdC3dhwWzhy
+      t9p3JL4VpjxlWxtOw8SHBbPkgpd2F9boU/rmFmvCEzgsaz10q7pyaIx1sVpGG3VB
+      T/9NNht4EhKZpjpws2QYH2DIAz70X22I4mfG0/a1+JEjnPNwerSsa+yEiAvPhaVu
+      RQIDAQABo0UwQzAdBgNVHQ4EFgQUZ+xvn/lvvOFjWCZRRImzhe9tcEwwEgYDVR0T
+      AQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAQYwDQYJKoZIhvcNAQENBQADggIB
+      AKjtVCIBOpW+DJa5HRMAlfLQr8cV8RfMVJA9Zz4I2tnJuQsgWJyxQihmqSN5G8qP
+      1iblA1y4WoI07vKzGzZDPu99CAN9KCSKhrM8I9McI/IwfH+ZxoMcDeI76FJlzdAd
+      AOtFE5nULzxrBJuS2D0tdFBGVrA2g7Gc92aCwQ9Mmef+3Ok3RU2Nlas/KtG6QDrJ
+      GDFi9nT8Lmh6hKd+pixsZao2cSeAvceSYdQwGs+H63WFZMmXjAF1kcGgMsAatKdA
+      mnUBYQDZXiL8bAI5AMtuZnwlZ1Q0Mn7oVXh1+GkBhb7BUZ+o4F32/Tp++qTOX2PR
+      YGedFeyNT8HJh2G7DIvY/ZEB2xhdCoesV9imjYOuMAu7gZQRkiyPUZb2W/RZiA1s
+      IwOzivxvIyyQXYj+CrD8e/RaoEB6wLIoOfGLenWK/Bvjzpd7LOuwrnNDbautjdNg
+      XdYWIW4VEggutk1ArnofcuD2UOd/mpZf/7Q5wJJI/19lHcSkHiXM3Dm622qQ/T7o
+      TUIwuP/sFyQ8BLcyD1v0zSar1uda18hLHnPscl0KtnFKjgbnBNZpRwHzqn0wYDU6
+      6rvZtx7fIV5WLs+r06jQHZIitXT6vogof2UT1h+iMhtwaOXUlUtH6lAClq8ribHl
+      +X2vPO94E6y2HpqYxJTsUnSsY1lLCO4axVie87CJAUD0
+      -----END CERTIFICATE-----
+    name: tls
+  observedGeneration: 6
+  operatorLastSuccessfulVersion: 0.48.0.redhat-00006
