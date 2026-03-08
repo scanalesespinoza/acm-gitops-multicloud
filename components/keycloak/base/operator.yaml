@@ -3,9 +3,7 @@ kind: OperatorGroup
 metadata:
   name: keycloak-operator-group
   namespace: keycloak-system
-spec:
-  targetNamespaces:
-  - keycloak-system
+spec: {}
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription

@@ -3,9 +3,7 @@ kind: OperatorGroup
 metadata:
   name: rhdh-operator-group
   namespace: rhdh-system
-spec:
-  targetNamespaces:
-  - rhdh-system
+spec: {}
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
